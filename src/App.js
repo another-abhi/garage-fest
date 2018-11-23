@@ -1,28 +1,63 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+
+import { Link } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import "./App.css";
+import Routes from "./Routes";
+import { connect } from "react-redux";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Garage Fest
-          </a>
-        </header>
+      <div className="App container">
+        <Navbar fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/" onClick={location.reload(true)}>
+                FINAPP
+              </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav pullRight>
+              <LinkContainer to="/signup">
+                <NavItem>Signup</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/login">
+                <NavItem onClick={location.reload(true)}>Login</NavItem>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Routes login={this.props.login} userFlag={this.props.userFlag} />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  console.log("mapStateToProps,", state);
+  return { ...state };
+}
+
+function mapDispatchToProps(dispatch) {
+  console.log("mapDispatchToProps,", dispatch);
+  return {
+    login: (username, password) => {
+      console.log("login map");
+      const args = {
+        email: username,
+        password: password
+      };
+      const action = { type: "login", args: args };
+      dispatch(action);
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
