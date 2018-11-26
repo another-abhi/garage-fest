@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 class App extends Component {
   render() {
@@ -14,9 +15,7 @@ class App extends Component {
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/" onClick={location.reload(true)}>
-                FINAPP
-              </Link>
+              <Link to="/">FINAPP</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -26,7 +25,7 @@ class App extends Component {
                 <NavItem>Signup</NavItem>
               </LinkContainer>
               <LinkContainer to="/login">
-                <NavItem onClick={location.reload(true)}>Login</NavItem>
+                <NavItem>Login</NavItem>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
@@ -60,4 +59,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(withRouter(App));

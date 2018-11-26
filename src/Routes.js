@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import Dash from "./containers/Dash";
+import { withRouter } from "react-router";
 
 class Routes extends Component {
   state = {
@@ -17,11 +18,10 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route exact path="/" component={withRouter(Home)} />
 
         <Route
           path="/login"
-          exact
           render={() => (
             <Login
               login={this.props.login}
@@ -32,7 +32,7 @@ class Routes extends Component {
         />
         {console.log("hellohello")}
         {this.props.userFlag ? (
-          <Route path="/dashboard" exact component={Dash} />
+          <Route path="/dashboard" exact component={withRouter(Dash)} />
         ) : (
           console.log("null")
         )}

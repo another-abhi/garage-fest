@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -67,3 +68,4 @@ export default class Login extends Component {
     );
   }
 }
+export default withRouter(Login);
